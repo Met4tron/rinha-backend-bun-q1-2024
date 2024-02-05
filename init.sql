@@ -1,8 +1,8 @@
 CREATE TABLE IF NOT EXISTS public.clients
 (
     id INTEGER NOT NULL,
-    amount_limit INTEGER NOT NULL,
-    amount INTEGER NOT NULL DEFAULT 0,
+    balance_limit INTEGER NOT NULL,
+    balance INTEGER NOT NULL DEFAULT 0,
     CONSTRAINT clients_pkey PRIMARY KEY (id)
 );
 
@@ -16,6 +16,8 @@ CREATE TABLE IF NOT EXISTS public.transactions
     created_by INTEGER NOT NULL,
     CONSTRAINT transactions_pkey PRIMARY KEY (id)
 );
+
+CREATE INDEX CONCURRENTLY idx_client_id ON public.clients (id);
 
 INSERT INTO public.clients
 VALUES  (1, 100000, 0),
